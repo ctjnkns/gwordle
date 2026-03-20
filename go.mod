@@ -1,3 +1,3 @@
-module github.com/ctjnkns/wordle
+module github.com/ctjnkns/gwordle
 
 go 1.26.1

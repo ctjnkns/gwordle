@@ -15,8 +15,8 @@ import (
 )
 
 const (
-	wordleWordsURL  = "https://gist.githubusercontent.com/cfreshman/8b92bc418b43096094cf5d1b0eea8f84/raw/2519c8c22e3274b7a665fe11ab233a96416defc2/nyt-wordle-allowed-guesses-2026-03-06.txt"
-	wordleWordsFile = "wordle.txt"
+	gwordleWordsURL  = "https://gist.githubusercontent.com/cfreshman/8b92bc418b43096094cf5d1b0eea8f84/raw/2519c8c22e3274b7a665fe11ab233a96416defc2/nyt-wordle-allowed-guesses-2026-03-06.txt"
+	gwordleWordsFile = "gwordle.txt"
 )
 
 const (
@@ -34,7 +34,7 @@ func main() {
 
 	flag.Usage = func() {
 		out := flag.CommandLine.Output()
-		fmt.Fprintln(out, "Play Wordle in the terminal.")
+		fmt.Fprintln(out, "Play gwordle in the terminal.")
 		fmt.Fprintln(out)
 		fmt.Fprintln(out, "Options:")
 		flag.PrintDefaults()
@@ -113,7 +113,7 @@ func playGame(debug *bool, selectedWord string, wordsMap map[string]bool) error 
 }
 
 func downloadWords(debug *bool) error {
-	resp, err := http.Get(wordleWordsURL)
+	resp, err := http.Get(gwordleWordsURL)
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,7 @@ func downloadWords(debug *bool) error {
 		return fmt.Errorf("unable to download words: %d", resp.StatusCode)
 	}
 
-	file, err := os.Create(wordleWordsFile)
+	file, err := os.Create(gwordleWordsFile)
 	if err != nil {
 		return err
 	}
@@ -141,15 +141,15 @@ func downloadWords(debug *bool) error {
 }
 
 func loadWords(debug *bool) ([]string, error) {
-	file, err := os.Open(wordleWordsFile)
+	file, err := os.Open(gwordleWordsFile)
 	if err != nil {
-		return nil, fmt.Errorf("unable to open wordle words file, run with --no-cache to re-download: %w", err)
+		return nil, fmt.Errorf("unable to open gwordle words file, run with --no-cache to re-download: %w", err)
 	}
 	defer file.Close()
 
 	data, err := io.ReadAll(file)
 	if err != nil {
-		return nil, fmt.Errorf("unable to read wordle file: %w", err)
+		return nil, fmt.Errorf("unable to read gwordle file: %w", err)
 	}
 
 	words := strings.Split(strings.TrimSpace(string(data)), "\n")

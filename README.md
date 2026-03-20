@@ -1,4 +1,4 @@
-# wordle
-![Wordle](./example/wordle.png)
+# gwordle
+![Gwordle](./example/gwordle.png)
 
 This is an unofficial personal project.
